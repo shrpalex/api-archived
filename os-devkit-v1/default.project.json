@@ -1,20 +1,15 @@
 {
-	"name": "roblox-ts-game",
+	"name": "azure's_mod_devkit",
 	"globIgnorePaths": [
 		"**/package.json",
 		"**/tsconfig.json"
 	],
 	"tree": {
 		"$className": "DataModel",
-		"ServerScriptService": {
-			"$className": "ServerScriptService",
-			"TS": {
-				"$path": "out/server"
-			}
-		},
+
 		"ReplicatedStorage": {
 			"$className": "ReplicatedStorage",
-			"rbxts_include": {
+			"externals": {
 				"$path": "include",
 				"node_modules": {
 					"$className": "Folder",
@@ -23,31 +18,24 @@
 					}
 				}
 			},
-			"TS": {
-				"$path": "out/shared"
-			}
+
+			"$path": "out/shared"
 		},
-		"StarterPlayer": {
-			"$className": "StarterPlayer",
-			"StarterPlayerScripts": {
-				"$className": "StarterPlayerScripts",
-				"TS": {
-					"$path": "out/client"
-				}
-			}
-		},
+
 		"Workspace": {
 			"$className": "Workspace",
 			"$properties": {
 				"FilteringEnabled": true
 			}
 		},
+
 		"HttpService": {
 			"$className": "HttpService",
 			"$properties": {
 				"HttpEnabled": true
 			}
 		},
+
 		"SoundService": {
 			"$className": "SoundService",
 			"$properties": {

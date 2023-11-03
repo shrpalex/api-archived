@@ -10,6 +10,12 @@ export class _root {
     public readonly Game: ReservedLayer;
     public readonly Top: ReservedLayer;
     public readonly Add: ReservedLayer;
+
+    //~ Game Objects ~//
+
+    public Spawnmenu: undefined;
+
+    // -- Methods -- //
     
     constructor(Parent?: PlayerGui | ScreenGui) {
         this.Instance = Make("ScreenGui", {
