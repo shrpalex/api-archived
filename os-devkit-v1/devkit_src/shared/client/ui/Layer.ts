@@ -59,7 +59,7 @@ export class DebugLayer extends _InhLayer {
             Parent: this.Instance
         });
 
-        // create textlabels
+        // create textlabels to update
 
         const fps_handle = Make("TextLabel", {
             Text: "fps (1/dt): //",
