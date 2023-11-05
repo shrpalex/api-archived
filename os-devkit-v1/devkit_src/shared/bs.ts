@@ -5,15 +5,26 @@ export namespace bs {
 
     export type Array<T> = T[];
     export type Layer = CanvasGroup | Frame; // layer instance stuff
+    export type Panel = CanvasGroup | Frame; // panel instance stuff
 
     // bitflags
 
     export const LayerFlag = {
         Group: 0x0,
         BaseFrame: 0x1,
-
-        
     };
+
+    export const PanelFlag = {
+
+        Decorated: 0x000,
+        Bland: 0x010,
+        Custom: 0x011,
+
+        Group: 0x100,
+        BaseFrame: 0x101
+
+        // todo add more flags
+    }
 
     // predefined styles and colors
 
