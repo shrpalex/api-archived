@@ -18,4 +18,14 @@ export namespace bs {
     // predefined styles and colors
 
     export const Background = Color3.fromRGB(0, 0, 0);
+
+    // common stuff
+
+    export namespace utils {
+        export function fixedpoint(n: number, precision: number) {
+            if (precision < 0) return;
+
+            return math.floor(n * math.pow(10, precision)) / math.pow(10, precision);
+        }
+    }
 }

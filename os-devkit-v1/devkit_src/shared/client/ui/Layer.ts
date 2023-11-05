@@ -66,8 +66,16 @@ export class DebugLayer extends _InhLayer {
             Parent: this.Instance
         });
 
+        const deltadisplay = Make("TextLabel", {
+            Text: "delta: //",
+            Parent: this.Instance
+        });
+
+        // todo make text interchangeable from user settings
+
         RunService.BindToRenderStep("debug_updater", Enum.RenderPriority.Camera.Value, (dt) => {
             fps_handle.Text = "fps (1/dt): " + math.floor(1 / dt); 
+            deltadisplay.Text = "delta: " + bs.utils.fixedpoint(dt, 3); // 0.013091345 -> 0.013
         })
     }
 }
