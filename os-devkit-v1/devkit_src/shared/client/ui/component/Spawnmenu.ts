@@ -1,5 +1,6 @@
 // spawnmenu ui component
 
+import { bs } from "shared/bs";
 import { Panel } from "../Panel";
 import { SpawnmenuCategory } from "./SpawnmenuCategory";
 
@@ -18,7 +19,7 @@ export class Spawnmenu extends Panel {
 
     //
 
-    public readonly Categories: SpawnmenuCategory[] = [];
+    public readonly Categories: bs.types.Array<SpawnmenuCategory> = [];
 
     constructor(ov_ct?: SpawnmenuCategory[]) {
         super();

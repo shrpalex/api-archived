@@ -2,7 +2,7 @@ import { Make } from "@rbxts/altmake";
 import { bs } from "shared/bs";
 
 export abstract class _InhPanel {
-    private readonly Item: bs.types.AppendableItem[] = [];
+    private readonly Item: bs.types.Array<bs.types.AppendableItem> = [];
 
     public AppendItem(Object: bs.types.AppendableItem) {
         this.Item.push(Object);
