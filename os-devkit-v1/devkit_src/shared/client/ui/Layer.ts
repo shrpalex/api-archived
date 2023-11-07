@@ -5,7 +5,7 @@ import { bs } from "shared/bs";
 // base Layer class implementation for non-user generated Layers
 
 export abstract class _InhLayer {
-    public readonly Instance: bs.Layer;
+    public readonly Instance: bs.types.Layer;
 
     constructor(Parent?: ScreenGui) {
         this.Instance = Make("CanvasGroup", {
@@ -84,7 +84,7 @@ export class ReservedLayer extends _InhLayer {}
 // user instanced layer
 
 export class InstanceableLayer {
-    private Instance: bs.Layer;
+    private Instance: bs.types.Layer;
     
     constructor(LayerMode: number) {
         this.Instance = Make(LayerMode & bs.LayerFlag.BaseFrame ? "Frame" : "CanvasGroup")

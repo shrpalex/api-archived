@@ -3,9 +3,14 @@
 export namespace bs {
     // typedefs
 
-    export type Array<T> = T[];
-    export type Layer = CanvasGroup | Frame; // layer instance stuff
-    export type Panel = CanvasGroup | Frame; // panel instance stuff
+    export namespace types {
+        export type Array<T> = T[];
+        export type Layer = CanvasGroup | Frame; // layer instance stuff
+        export type Panel = CanvasGroup | Frame; // panel instance stuff
+    
+        export type AppendableItem = GuiObject;
+        export type AppendableModifier = UIBase | UIComponent | UIConstraint | UILayout;
+    }
 
     // bitflags
 

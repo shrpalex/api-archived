@@ -1,5 +1,6 @@
 import { Make } from "@rbxts/altmake";
 import { DebugLayer, InstanceableLayer, ReservedLayer } from "./Layer";
+import { Spawnmenu } from "./component/Spawnmenu";
 
 export class _root {
     private Instance: ScreenGui;
@@ -13,7 +14,7 @@ export class _root {
 
     //~ Game Objects ~//
 
-    public Spawnmenu: undefined;
+    public Spawnmenu: Spawnmenu;
 
     // -- Methods -- //
     
@@ -28,6 +29,10 @@ export class _root {
         this.Game = new ReservedLayer();
         this.Top = new ReservedLayer();
         this.Add = new ReservedLayer();
+
+        //~ Adding stuff ~//
+
+        this.Spawnmenu = new Spawnmenu();
     }
 
     // mount function
