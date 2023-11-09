@@ -27,11 +27,11 @@ export class StyledPanel extends _InhPanel {
     constructor(ff: number, Parent?: bs.types.Layer) {
         super();
 
-        const PanelStyle = (ff & bs.PanelFlag.Bland) == 1 || (ff & bs.PanelFlag.Decorated) == 1 || (ff & bs.PanelFlag.Custom) == 1;
+        const PanelStyle = (ff & bs.PanelFlag.Bland) === 1 || (ff & bs.PanelFlag.Decorated) === 1 || (ff & bs.PanelFlag.Custom) === 1;
         
         // todo style panel
 
-        this.Instance = Make((ff & bs.PanelFlag.BaseFrame) == 1 ? "Frame" : "CanvasGroup", {
+        this.Instance = Make((ff & bs.PanelFlag.BaseFrame) === 1 ? "Frame" : "CanvasGroup", {
             Parent: Parent
         });
     }
