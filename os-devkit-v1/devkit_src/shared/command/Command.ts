@@ -49,7 +49,7 @@ export class Command {
         this.Callback = Callback;
     }
 
-    public Run(Player: Player, Args: CommandArgs) {
+    public async Run(Player: Player, Args: CommandArgs) {
         this.Callback(Player, Args);
     }
 }
