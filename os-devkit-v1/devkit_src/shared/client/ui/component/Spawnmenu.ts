@@ -19,7 +19,7 @@ export class Spawnmenu extends Panel {
 
     //
 
-    public readonly Categories: Game.types.Array<SpawnmenuCategory> = [];
+    public readonly Categories: Game.Types.Array<SpawnmenuCategory> = [];
 
     constructor(ov_ct?: SpawnmenuCategory[]) {
         super();

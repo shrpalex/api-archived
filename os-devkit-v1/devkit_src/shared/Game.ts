@@ -7,9 +7,7 @@ export namespace Game {
     export const INF = math.huge;
     export const NINF = -math.huge;
 
-    // typedefs
-
-    export namespace types {
+    export namespace Types {
         export type Array<T> = T[];
         export type Layer = CanvasGroup | Frame; // layer instance stuff
         export type Panel = CanvasGroup | Frame; // panel instance stuff
@@ -18,32 +16,26 @@ export namespace Game {
         export type AppendableModifier = UIBase | UIComponent | UIConstraint | UILayout;
     }
 
-    // bitflags
-
-    export const LayerFlag = {
-        Group: 0x0,
-        BaseFrame: 0x1,
-    };
-
-    export const PanelFlag = {
-
-        Decorated: 0x000,
-        Bland: 0x010,
-        Custom: 0x011,
-
-        Group: 0x100,
-        BaseFrame: 0x101
-
-        // todo add more flags
+    export namespace Flags {
+        export const LayerFlag = {
+            Group: 0x0,
+            BaseFrame: 0x1,
+        };
+    
+        export const PanelFlag = {
+    
+            Decorated: 0x000,
+            Bland: 0x010,
+            Custom: 0x011,
+    
+            Group: 0x100,
+            BaseFrame: 0x101
+    
+            // todo add more flags
+        }
     }
 
-    // predefined styles and colors
-
-    export const Background = Color3.fromRGB(0, 0, 0);
-
-    // common stuff
-
-    export namespace enums {
+    export namespace Enums {
         export enum InputLabels {
             // Physical
 
@@ -66,14 +58,14 @@ export namespace Game {
         }
     }
 
-    export namespace utils {
-        export function fixedpoint(n: number, precision: number) {
+    export namespace Utils {
+        export function FPoint(n: number, precision: number) {
             if (precision < 0) return;
 
             return math.floor(n * math.pow(10, precision)) / math.pow(10, precision);
         }
 
-        export function partition(arr: number[], left: number = 0, right: number = arr.size() - 1) {
+        export function Partition(arr: number[], left: number = 0, right: number = arr.size() - 1) {
             const pv = arr[math.floor((right + left / 2))];
 
             let i, j;
@@ -100,19 +92,19 @@ export namespace Game {
             return i;
         }
 
-        export function qsort(arr: number[], left: number = 0, right: number = arr.size() - 1) {
+        export function QSort(arr: number[], left: number = 0, right: number = arr.size() - 1) {
             let i;
 
             if (arr.size() <= 1) return arr;
 
-            i = partition(arr, left, right);
+            i = Partition(arr, left, right);
 
             if (left < i - 1) {
-                qsort(arr, left, i - 1);
+                QSort(arr, left, i - 1);
             }
 
             if (i < right) {
-                qsort(arr, i, right);
+                QSort(arr, i, right);
             }
 
             return arr;
