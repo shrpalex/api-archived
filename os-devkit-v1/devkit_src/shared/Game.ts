@@ -7,6 +7,29 @@ export namespace Game {
     export const INF = math.huge;
     export const NINF = -math.huge;
 
+    export namespace Data {
+        // Character Stuff
+
+        export const RUN_STEP = math.exp(1/2);
+        export const CROUCH_STEP = math.exp(-1/2);
+
+        export const DEFAULT_SPEED = 13;
+        export const DEFAULT_PJUMP = 50;
+
+        export const RUN_SPEED = DEFAULT_SPEED * RUN_STEP;
+        export const RUN_PJUMP = DEFAULT_PJUMP - DEFAULT_SPEED * CROUCH_STEP;
+
+        export const CROUCH_SPEED = DEFAULT_SPEED * CROUCH_STEP;
+        export const CROUCH_PJUMP = DEFAULT_PJUMP - DEFAULT_SPEED * RUN_STEP;
+
+        export const DEFAULT_FOV = 70;
+        export const RUN_FOV = 85;
+        export const CROUCH_FOV = 65;
+
+        export const RUN_ACCEL_TIME = 0.25;
+        export const RUN_FOV_TIME = 0.2;
+    }
+
     export namespace Types {
         export type Array<T> = T[];
         export type Layer = CanvasGroup | Frame; // layer instance stuff
