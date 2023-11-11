@@ -87,7 +87,7 @@ export class Client {
 
         RunService.BindToRenderStep("__gr_INPUTUPDATE__", Enum.RenderPriority.Input.Value, (dt: number) => {
             
-        })
+        });
     }
 
     // Methods
