@@ -1,18 +1,18 @@
 import { Make } from "@rbxts/altmake";
-import { bs } from "shared/bs";
+import { Game } from "shared/Game";
 
 export abstract class _InhPanel {
-    private readonly Item: bs.types.Array<bs.types.AppendableItem> = [];
+    private readonly Item: Game.types.Array<Game.types.AppendableItem> = [];
 
-    public AppendItem(Object: bs.types.AppendableItem) {
+    public AppendItem(Object: Game.types.AppendableItem) {
         this.Item.push(Object);
     }
 }
 
 export class Panel extends _InhPanel {
-    public readonly Instance: bs.types.AppendableItem;
+    public readonly Instance: Game.types.AppendableItem;
 
-    constructor(Parent?: bs.types.Layer) {
+    constructor(Parent?: Game.types.Layer) {
         super();
 
         this.Instance = Make("CanvasGroup", {
@@ -22,16 +22,16 @@ export class Panel extends _InhPanel {
 }
 
 export class StyledPanel extends _InhPanel {
-    public readonly Instance: bs.types.Layer;
+    public readonly Instance: Game.types.Layer;
 
-    constructor(ff: number, Parent?: bs.types.Layer) {
+    constructor(ff: number, Parent?: Game.types.Layer) {
         super();
 
-        const PanelStyle = (ff & bs.PanelFlag.Bland) === 1 || (ff & bs.PanelFlag.Decorated) === 1 || (ff & bs.PanelFlag.Custom) === 1;
+        const PanelStyle = (ff & Game.PanelFlag.Bland) === 1 || (ff & Game.PanelFlag.Decorated) === 1 || (ff & Game.PanelFlag.Custom) === 1;
         
         // todo style panel
 
-        this.Instance = Make((ff & bs.PanelFlag.BaseFrame) === 1 ? "Frame" : "CanvasGroup", {
+        this.Instance = Make((ff & Game.PanelFlag.BaseFrame) === 1 ? "Frame" : "CanvasGroup", {
             Parent: Parent
         });
     }

@@ -1,11 +1,11 @@
 import { Make } from "@rbxts/altmake";
 import { RunService } from "@rbxts/services";
-import { bs } from "shared/bs";
+import { Game } from "shared/Game";
 
 // base Layer class implementation for non-user generated Layers
 
 export abstract class _InhLayer {
-    public readonly Instance: bs.types.Layer;
+    public readonly Instance: Game.types.Layer;
 
     constructor(Parent?: ScreenGui) {
         this.Instance = Make("CanvasGroup", {
@@ -75,7 +75,7 @@ export class DebugLayer extends _InhLayer {
 
         RunService.BindToRenderStep("debug_updater", Enum.RenderPriority.Camera.Value, (dt) => {
             fps_handle.Text = "fps (1/dt): " + math.floor(1 / dt); 
-            deltadisplay.Text = "delta: " + bs.utils.fixedpoint(dt, 3); // 0.013091345 -> 0.013
+            deltadisplay.Text = "delta: " + Game.utils.fixedpoint(dt, 3); // 0.013091345 -> 0.013
         })
     }
 }
@@ -84,9 +84,9 @@ export class ReservedLayer extends _InhLayer {}
 // user instanced layer
 
 export class InstanceableLayer {
-    private Instance: bs.types.Layer;
+    private Instance: Game.types.Layer;
     
     constructor(LayerMode: number) {
-        this.Instance = Make(LayerMode & bs.LayerFlag.BaseFrame ? "Frame" : "CanvasGroup")
+        this.Instance = Make(LayerMode & Game.LayerFlag.BaseFrame ? "Frame" : "CanvasGroup")
     }
 }
