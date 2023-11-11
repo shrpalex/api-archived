@@ -3,6 +3,8 @@ import { DebugLayer, InstanceableLayer, ReservedLayer } from "./Layer";
 import { Spawnmenu } from "./component/Spawnmenu";
 
 export class _root {
+    // -- Properties -- //
+
     private Instance: ScreenGui;
 
     //~ Layers ~//
@@ -15,10 +17,10 @@ export class _root {
     //~ Game Objects ~//
 
     public Spawnmenu: Spawnmenu;
-
-    // -- Methods -- //
     
-    constructor(Parent?: PlayerGui | ScreenGui) {
+    // constructor //
+
+    constructor(Parent?: PlayerGui | StarterGui) {
         this.Instance = Make("ScreenGui", {
             Parent: Parent
         });
@@ -35,9 +37,17 @@ export class _root {
         this.Spawnmenu = new Spawnmenu();
     }
 
-    // mount function
+    // -- Methods -- //
 
-    public mount(Root: PlayerGui | ScreenGui) {
+    public Mount(Root: PlayerGui | ScreenGui) {
         this.Instance.Parent = Root;
+    }
+
+    public Toggle() {
+        this.Instance.Enabled = !this.Instance.Enabled;
+    }
+
+    public SetEnabled(e: boolean = true) {
+        this.Instance.Enabled = e;
     }
 }

@@ -1,31 +1,47 @@
 import { Make } from "@rbxts/altmake";
 import { Game } from "shared/Game";
 
-export abstract class _InhPanel {
-    private readonly Item: Game.Types.Array<Game.Types.AppendableItem> = [];
+export class Panel {
+    private Items: Array<Game.Types.AppendableItem> = [];
+    private Modifiers: Array<Game.Types.AppendableModifier> = [];
 
-    public AppendItem(Object: Game.Types.AppendableItem) {
-        this.Item.push(Object);
-    }
-}
-
-export class Panel extends _InhPanel {
-    public readonly Instance: Game.Types.AppendableItem;
+    public readonly Instance: Game.Types.Panel;
 
     constructor(Parent?: Game.Types.Layer) {
-        super();
 
         this.Instance = Make("CanvasGroup", {
             Parent: Parent
         });
     }
+
+    public AppendItem(Object: Game.Types.AppendableItem) {
+        Object.Parent = this.Instance;
+        
+        this.Items.push(Object);
+    }
+
+    public AppendModifier(Cst: Game.Types.AppendableModifier) {
+        Cst.Parent = this.Instance;
+
+        this.Modifiers.push(Cst);
+    }
+
+    public Toggle() {
+        this.Instance.Visible = !this.Instance.Visible;
+    }
+
+    public SetVisible(e: boolean = true) {
+        this.Instance.Visible = e;
+    }
 }
 
-export class StyledPanel extends _InhPanel {
-    public readonly Instance: Game.Types.Layer;
+export class StyledPanel {
+    private Items: Array<Game.Types.AppendableItem> = [];
+    private Modifiers: Array<Game.Types.AppendableModifier> = [];
+    
+    public readonly Instance: Game.Types.Panel;
 
     constructor(ff: number, Parent?: Game.Types.Layer) {
-        super();
 
         const PanelStyle = (ff & Game.Flags.PanelFlag.Bland) === 1 || (ff & Game.Flags.PanelFlag.Decorated) === 1 || (ff & Game.Flags.PanelFlag.Custom) === 1;
         
@@ -34,5 +50,25 @@ export class StyledPanel extends _InhPanel {
         this.Instance = Make((ff & Game.Flags.PanelFlag.BaseFrame) === 1 ? "Frame" : "CanvasGroup", {
             Parent: Parent
         });
+    }
+
+    private AppendItem(Object: Game.Types.AppendableItem) {
+        Object.Parent = this.Instance;
+        
+        this.Items.push(Object);
+    }
+
+    private AppendModifier(Cst: Game.Types.AppendableModifier) {
+        Cst.Parent = this.Instance;
+
+        this.Modifiers.push(Cst);
+    }
+    
+    public Toggle() {
+        this.Instance.Visible = !this.Instance.Visible;
+    }
+
+    public SetVisible(e: boolean = true) {
+        this.Instance.Visible = e;
     }
 }

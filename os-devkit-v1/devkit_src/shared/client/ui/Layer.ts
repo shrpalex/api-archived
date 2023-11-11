@@ -4,7 +4,7 @@ import { Game } from "shared/Game";
 
 // base Layer class implementation for non-user generated Layers
 
-export abstract class _InhLayer {
+export abstract class TemplateLayer {
     public readonly Instance: Game.Types.Layer;
 
     constructor(Parent?: ScreenGui) {
@@ -13,11 +13,19 @@ export abstract class _InhLayer {
             Parent: Parent
         });
     }
+
+    public Toggle() {
+        this.Instance.Visible = !this.Instance.Visible;
+    }
+
+    public SetVisible(e: boolean = true) {
+        this.Instance.Visible = e;
+    }
 }
 
 // extensions of _InhLayer for game reserved layers (debug, ...)
 
-export class DebugLayer extends _InhLayer {
+export class DebugLayer extends TemplateLayer {
     constructor(Scale?: number) {
         super();
         
@@ -79,7 +87,7 @@ export class DebugLayer extends _InhLayer {
         })
     }
 }
-export class ReservedLayer extends _InhLayer {}
+export class ReservedLayer extends TemplateLayer {} // todo
 
 // user instanced layer
 

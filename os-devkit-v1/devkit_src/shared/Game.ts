@@ -31,12 +31,13 @@ export namespace Game {
     }
 
     export namespace Types {
-        export type Array<T> = T[];
         export type Layer = CanvasGroup | Frame; // layer instance stuff
         export type Panel = CanvasGroup | Frame; // panel instance stuff
     
         export type AppendableItem = GuiObject;
         export type AppendableModifier = UIBase | UIComponent | UIConstraint | UILayout;
+
+        export type ICON = string;
     }
 
     export namespace Flags {

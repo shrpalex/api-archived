@@ -1,5 +1,6 @@
 import { TweenService, Workspace } from "@rbxts/services";
 import { Game } from "shared/Game";
+import { _root } from "../ui/root";
 
 export type INPUTENTRY = (Label: number, IState: Enum.UserInputState, IObject: InputObject) => any;
 
@@ -17,6 +18,7 @@ export class Client {
 
     public Instance: Player;
     public Character: ClientCharacter;
+    public Root: _root;
 
     public readonly ClientInput: INPUTENTRY = (Label: number, IState: Enum.UserInputState, IObject: InputObject) => {
         const State = IState === Enum.UserInputState.Begin;
@@ -38,16 +40,22 @@ export class Client {
     // Self-explanatory
 
     constructor(Source: Player) {
-        this.Instance = Source;
+        this.Instance = Source; // initialize Instance
         
         const Character = this.Instance.Character || this.Instance.CharacterAdded.Wait()[0];
         
+        // initialize Character interface
+
         this.Character = {
             Model: Character,
             
             Root: Character.WaitForChild("HumanoidRootPart") as BasePart,
             Humanoid: Character.WaitForChild("Humanoid") as Humanoid
         };
+
+        // initalize gui
+
+        this.Root = new _root(this.Instance.WaitForChild("PlayerGui") as PlayerGui);
 
         this.DeathConnection = this.Character.Humanoid.Died.Connect(() => {
             this.UpdateCharacter();
