@@ -28,6 +28,21 @@ export namespace Game {
 
         export const RUN_ACCEL_TIME = 0.25;
         export const RUN_FOV_TIME = 0.2;
+
+        // Command
+
+        export const Prefix = '/';
+        export const Spacer = ' ';
+        
+        export const PermissionGroups = [
+            ["Owner", math.huge, []],
+            ["Admin", 50, []],
+            ["Moderator", 35, []],
+            ["Helper", 30, []],
+            ["Special", 25, []]
+        ];
+
+        export const BUSER_INT = 1;
     }
 
     export namespace Types {
@@ -80,6 +95,13 @@ export namespace Game {
             DEBUGCMOD,
             SPAWNMENU,
             CONSOLE
+        }
+
+        export enum ClientState {
+            NONE = -1,
+            RUN,
+            CROUCH,
+            SWALK
         }
     }
 

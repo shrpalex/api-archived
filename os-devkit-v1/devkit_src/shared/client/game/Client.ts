@@ -1,4 +1,4 @@
-import { TweenService, Workspace } from "@rbxts/services";
+import { RunService, TweenService, Workspace } from "@rbxts/services";
 import { Game } from "shared/Game";
 import { _root } from "../ui/root";
 
@@ -19,6 +19,7 @@ export class Client {
     public Instance: Player;
     public Character: ClientCharacter;
     public Root: _root;
+    public ClientState: Game.Enums.ClientState = Game.Enums.ClientState.NONE;
 
     public readonly ClientInput: INPUTENTRY = (Label: number, IState: Enum.UserInputState, IObject: InputObject) => {
         const State = IState === Enum.UserInputState.Begin;
@@ -31,6 +32,8 @@ export class Client {
 
                 break;
             case Game.Enums.InputLabels.CROUCH:
+                this.Crouch(State);
+
                 break;
             case Game.Enums.InputLabels.SWALK:
                 break;
@@ -41,6 +44,7 @@ export class Client {
             case Game.Enums.InputLabels.MENU:
                 break;
             case Game.Enums.InputLabels.DEBUG:
+                this.Root.Debug.SetVisible(State);
                 break;
             case Game.Enums.InputLabels.DEBUGCMOD:
                 break;
@@ -80,6 +84,10 @@ export class Client {
         this.DeathConnection = this.Character.Humanoid.Died.Connect(() => {
             this.UpdateCharacter();
         });
+
+        RunService.BindToRenderStep("__gr_INPUTUPDATE__", Enum.RenderPriority.Input.Value, (dt: number) => {
+            
+        })
     }
 
     // Methods
@@ -90,7 +98,12 @@ export class Client {
      * @return void
     */
 
-    protected Run(State: boolean) {
+
+
+    protected async Run(State: boolean) {
+        if (this.GetHumanoid().MoveDirection === Vector3.zero || this.GetHumanoid().FloorMaterial === Enum.Material.Air) return;
+        if (this.ClientState !== Game.Enums.ClientState.NONE) { this.Crouch(false); return; }
+
         this.GetHumanoid().UseJumpPower = true; // Set this to true so it takes JumpPower
 
         // create the two tweens
@@ -109,6 +122,30 @@ export class Client {
 
         walk.Destroy();
         fov.Destroy();
+    }
+
+    /* This is the Crouch Method which handles the Crouching Request
+     * @func Crouch
+     * @params State (boolean)
+     * @return void
+    */
+
+    protected async Crouch(State: boolean) {
+        if (this.GetHumanoid().FloorMaterial === Enum.Material.Air) return;
+        if (this.ClientState !== Game.Enums.ClientState.NONE) { this.Run(false); return; }
+        this.GetHumanoid().UseJumpPower = true;
+
+        // create the tween and bind to RenderStepped
+
+        const walk = TweenService.Create(this.GetHumanoid(), new TweenInfo(Game.Data.RUN_ACCEL_TIME), {
+            WalkSpeed: State ? Game.Data.CROUCH_SPEED : Game.Data.DEFAULT_SPEED,
+            JumpPower: State ? Game.Data.CROUCH_PJUMP : Game.Data.DEFAULT_PJUMP,
+
+            CameraOffset: State ? new Vector3(this.GetHumanoid().CameraOffset.X, this.GetHumanoid().CameraOffset.Y - 0.5, this.GetHumanoid().CameraOffset.Z) : new Vector3(this.GetHumanoid().CameraOffset.X, this.GetHumanoid().CameraOffset.Y + 0.5, this.GetHumanoid().CameraOffset.Z)
+        });
+
+        walk.Play();
+        walk.Destroy();
     }
 
     /* A method that updates the Character interface
