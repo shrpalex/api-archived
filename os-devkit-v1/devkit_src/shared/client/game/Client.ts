@@ -24,11 +24,29 @@ export class Client {
         const State = IState === Enum.UserInputState.Begin;
 
         switch(Label) {
+            // See Game.Enums.InputLabels for Entry Definitions
+
             case Game.Enums.InputLabels.RUN:
                 this.Run(State);
 
                 break;
             case Game.Enums.InputLabels.CROUCH:
+                break;
+            case Game.Enums.InputLabels.SWALK:
+                break;
+            case Game.Enums.InputLabels.GRAB:
+                break;
+            case Game.Enums.InputLabels.PLAYERLIST:
+                break;
+            case Game.Enums.InputLabels.MENU:
+                break;
+            case Game.Enums.InputLabels.DEBUG:
+                break;
+            case Game.Enums.InputLabels.DEBUGCMOD:
+                break;
+            case Game.Enums.InputLabels.SPAWNMENU:
+                break;
+            case Game.Enums.InputLabels.CONSOLE:
                 break;
             default:
                 break;
