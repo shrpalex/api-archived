@@ -32,6 +32,7 @@ export namespace Game {
 
     export namespace Types {
         export type Layer = CanvasGroup | Frame; // layer instance stuff
+        export type BasePanel = CanvasGroup;
         export type Panel = CanvasGroup | Frame; // panel instance stuff
     
         export type AppendableItem = GuiObject;

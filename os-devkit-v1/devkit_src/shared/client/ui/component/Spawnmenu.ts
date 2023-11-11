@@ -4,6 +4,7 @@ import { Game } from "shared/Game";
 import { Panel } from "../Panel";
 import { SpawnmenuCategory } from "./SpawnmenuCategory";
 import { Make } from "@rbxts/altmake";
+import { TweenService } from "@rbxts/services";
 
 export class Spawnmenu extends Panel { // use panel for no constructor overlap
     // static Category
@@ -55,9 +56,46 @@ export class Spawnmenu extends Panel { // use panel for no constructor overlap
 
     // Methods
 
-    public Toggle() {
-        // rewrite toggle, always use toggle for components to get animations, else use ::SetVisible
+    public async Toggle() {
+        this.SetVisible(!this.Instance.Visible);
+    }
 
+    public async SetVisible(e?: boolean): Promise<number | void> {
+        // Check to prevent people spamming ::SetVisible()
 
+        if (this.Instance.GroupTransparency > 0 || this.Instance.GroupTransparency < 1) return Game.ERROR;
+
+        // Animate
+
+        const Start = UDim2.fromScale(0.5, e ? 0.45 : 0.5), End = UDim2.fromScale(0.5, e ? 0.5 : 0.55);
+        const Stroke = this.Instance.FindFirstChildOfClass("UIStroke");
+
+        if (!Stroke) return; // assertion for the stroke
+
+        // pre-initialize the Instance for the animation
+
+        Stroke.Transparency = e ? 1 : 0;
+        this.Instance.GroupTransparency = e ? 1 : 0;
+        this.Instance.Position = Start;
+
+        // animate stuff
+
+        const a0 = TweenService.Create(this.Instance, new TweenInfo(0.25), {
+            Position: End,
+            GroupTransparency: e ? 0 : 1
+        });
+
+        const a1 = TweenService.Create(this.Instance, new TweenInfo(0.25), {
+            Transparency: e ? 0 : 1
+        });
+
+        // Disposal, client can await
+
+        a0.Play(); a1.Play();
+
+        a0.Completed.Wait();
+
+        a0.Destroy();
+        a1.Destroy();
     }
 }

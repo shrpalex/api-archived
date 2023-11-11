@@ -1,5 +1,0 @@
-version: 2
-build:
-  os: ubuntu-22.04
-  tools:
-    typescript: "5.2.2"

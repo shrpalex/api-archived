@@ -5,7 +5,7 @@ export class Panel {
     private Items: Array<Game.Types.AppendableItem> = [];
     private Modifiers: Array<Game.Types.AppendableModifier> = [];
 
-    public readonly Instance: Game.Types.Panel;
+    public readonly Instance: Game.Types.BasePanel;
 
     constructor(Parent?: Game.Types.Layer) {
 

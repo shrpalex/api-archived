@@ -45,6 +45,8 @@ export class Client {
             case Game.Enums.InputLabels.DEBUGCMOD:
                 break;
             case Game.Enums.InputLabels.SPAWNMENU:
+                this.Root.Spawnmenu.SetVisible(State);
+
                 break;
             case Game.Enums.InputLabels.CONSOLE:
                 break;
