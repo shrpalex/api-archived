@@ -16,10 +16,27 @@ export class Client {
 
     private DeathConnection: RBXScriptConnection;
 
+    // 
+
     public Instance: Player;
     public Character: ClientCharacter;
     public Root: _root;
+
+    // Character Stuff
+
+    // Bleedout interploation array
+
+    public readonly BloodVolume = 8; // % (total mass (kg))
+    public readonly BleedoutArr: Array<number> = [
+            0, // head, instant death if its higher than 0.1
+        0,  0,  0, // arms (1 -> 100ml/s), torso -> (35ml/s per 0.1)
+          // //
+          0 , 0, // legs (1 -> 150ml/s)
+    ];
+
     public ClientState: Game.Enums.ClientState = Game.Enums.ClientState.NONE;
+
+    // Input
 
     public readonly ClientInput: INPUTENTRY = (Label: number, IState: Enum.UserInputState, IObject: InputObject) => {
         const State = IState === Enum.UserInputState.Begin;
