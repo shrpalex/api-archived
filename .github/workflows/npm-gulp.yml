@@ -26,6 +26,7 @@ jobs:
       run: |
         cd node_modules
         npm install
+        npm install roblox-ts
         cd ..
         cd os-devkit-v1
         npx rbxtsc -w
